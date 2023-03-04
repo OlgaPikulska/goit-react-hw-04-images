@@ -2,6 +2,8 @@ import axios from "axios";
 
 
 export const fetchImages = async ({ inputValue, page }) => {
+    console.log(inputValue)
+    console.log(page)
     const response = await axios.get('https://pixabay.com/api/', {
         params: {
             key: "31759222-00acf71bf0a65e43bd085eba1",
@@ -13,6 +15,7 @@ export const fetchImages = async ({ inputValue, page }) => {
             per_page: 12,
         }
     });
+    console.log(response)
 
     return {
         hits: response.data.hits,
