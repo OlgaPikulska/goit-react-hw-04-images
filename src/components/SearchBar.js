@@ -87,3 +87,7 @@ export const SearchBar = (props) => {
         </StyledForm >
     )
 }
+
+SearchBar.propTypes = {
+    props: PropTypes.object,
+};

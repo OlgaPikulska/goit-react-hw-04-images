@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledHeader } from "./Header";
 import { SearchBar } from "./SearchBar";
 import { fetchImages } from "services/api";
+import { ImageGallery } from "./ImageGallery";
 
 const StyledApp = styled.div`
     display: grid;
@@ -56,6 +57,7 @@ export const App = () => {
       <StyledHeader>
         <SearchBar handleSubmit={handleSubmit} />
       </StyledHeader>
+      <ImageGallery images={images} />
     </StyledApp>
   );
 };
