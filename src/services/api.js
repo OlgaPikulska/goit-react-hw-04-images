@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-export const fetchImages = async ({ inputValue, page }) => {
+export const fetchImages = async (query, page) => {
     const response = await axios.get('https://pixabay.com/api/', {
         params: {
             key: "31759222-00acf71bf0a65e43bd085eba1",
-            q: `${inputValue}`,
+            q: `${query}`,
             image_type: "photo",
             orientation: "horizontal",
             safesearch: true,

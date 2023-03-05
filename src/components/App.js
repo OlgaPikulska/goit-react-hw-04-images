@@ -27,36 +27,38 @@ export const App = () => {
     setPage(1);
   }
 
-  const handleImagesRequest = async ({ searchQuery = query, currentPage = page } = {}) => {
-    setIsLoading(true)
+  useEffect(() => {
+    const handleImagesRequest = async () => {
+      setIsLoading(true)
 
-    try {
-      const fetchedData = await fetchImages({ inputValue: searchQuery, page: currentPage });
+      try {
+        const fetchedData = await fetchImages(query, page);
 
-      const lastPage = Math.ceil(fetchedData.total / 12);
-      setLastPage(lastPage);
+        const lastPage = Math.ceil(fetchedData.total / 12);
+        setLastPage(lastPage);
 
-      if (currentPage === 1) {
-        setImages(fetchedData.hits)
-      } else {
-        setImages(prevState => ([...prevState, ...fetchedData.hits])
-        );
+        if (page === 1) {
+          setImages(fetchedData.hits)
+        } else {
+          setImages(prevState => ([...prevState, ...fetchedData.hits])
+          );
+        }
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      setError(error.message)
-    } finally {
-      setIsLoading(false);
     }
-  }
+    if (query) {
+      handleImagesRequest();
+    }
+  }, [query, page])
 
   useEffect(() => {
-    if (query) {
-      handleImagesRequest({ searchQuery: query, currentPage: page });
-    }
     if (page === 1) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [query, page]);
+  }, [page]);
 
 
   const handleClick = () => {
