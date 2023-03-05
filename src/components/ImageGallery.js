@@ -32,41 +32,41 @@ const StyledImage = styled.img`
 `
 let instance;
 const openLightbox = ({ largeImageURL, tags }) => {
-    const content =
-        `<div class="overlay">
+  const content =
+    `<div class="overlay">
     <div class="modal">
       <img src=${largeImageURL} alt=${tags} />
     </div>
   </div>`
-    instance = basicLightbox.create(content)
-    instance.show()
+  instance = basicLightbox.create(content)
+  instance.show()
 }
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        instance.close();
-    }
+  if (event.key === "Escape") {
+    instance.close();
+  }
 });
 
 export const ImageGallery = ({ images }) => {
-    return (
-        <StyledGallery>
-            {images.map(({ id, webformatURL, largeImageURL, tags }) => (
-                <StyledImageGalleryItem key={id}>
-                    <StyledImage src={webformatURL} alt={tags} onClick={() => openLightbox({ largeImageURL, tags })} />
-                </StyledImageGalleryItem>
-            ))}
-        </StyledGallery>
-    )
+  return (
+    <StyledGallery>
+      {images.map(({ id, webformatURL, largeImageURL, tags }) => (
+        <StyledImageGalleryItem key={id}>
+          <StyledImage src={webformatURL} alt={tags} onClick={() => openLightbox({ largeImageURL, tags })} />
+        </StyledImageGalleryItem>
+      ))}
+    </StyledGallery>
+  )
 }
 
 ImageGallery.propTypes = {
-    images: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            webformatURL: PropTypes.string.isRequired,
-            largeImageURL: PropTypes.string.isRequired,
-            tags: PropTypes.string.isRequired,
-        }).isRequired
-    ).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
